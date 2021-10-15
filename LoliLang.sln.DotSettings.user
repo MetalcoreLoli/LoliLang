@@ -3,5 +3,6 @@
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::859481CF-8600-4858-BECC-6CF14FEC5BF5::net5.0::LoliLang.Core.Tests.AddExpressionTests.ToString_WithLeftUndRightExpressions_ReturnsAddOnePlusTwoTest&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::859481CF-8600-4858-BECC-6CF14FEC5BF5::net5.0::LoliLang.Core.Tests.AddExpressionTests.Constructor_WithNulls_ThrowsNullReferencesException&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::859481CF-8600-4858-BECC-6CF14FEC5BF5::net5.0::LoliLang.Core.Tests.AddExpressionTests.Reduce_WithOneUndTwo_ReturnsThree&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
