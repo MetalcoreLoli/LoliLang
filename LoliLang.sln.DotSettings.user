@@ -4,5 +4,10 @@
     &lt;TestId&gt;xUnit::859481CF-8600-4858-BECC-6CF14FEC5BF5::net5.0::LoliLang.Core.Tests.AddExpressionTests.ToString_WithLeftUndRightExpressions_ReturnsAddOnePlusTwoTest&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::859481CF-8600-4858-BECC-6CF14FEC5BF5::net5.0::LoliLang.Core.Tests.AddExpressionTests.Constructor_WithNulls_ThrowsNullReferencesException&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::859481CF-8600-4858-BECC-6CF14FEC5BF5::net5.0::LoliLang.Core.Tests.AddExpressionTests.Reduce_WithOneUndTwo_ReturnsThree&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::859481CF-8600-4858-BECC-6CF14FEC5BF5::net5.0::LoliLang.Core.Tests.LoliUnitTests.SimpleText&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::859481CF-8600-4858-BECC-6CF14FEC5BF5::net5.0::LoliLang.Core.Tests.LoliUnitTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::E480DD1E-67A1-4DA4-BF24-2056637E04A2::net5.0::LoliLang.Lexy.Tests.LexyUnitTest.Test1&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::E480DD1E-67A1-4DA4-BF24-2056637E04A2::net5.0::LoliLang.Lexy.Tests.LexyTests.LootAt_WithOnePlusTwoString_ReturnsListOfTokens&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::E480DD1E-67A1-4DA4-BF24-2056637E04A2::net5.0::LoliLang.Lexy.Tests.LexyLinqTests.TryToLookAt_WithOnePlusTwo_ReturnsTokens&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
