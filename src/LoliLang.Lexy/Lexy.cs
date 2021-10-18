@@ -44,29 +44,6 @@ namespace LoliLang.Lexy
 
                 expression = sub.Skip(token.Value.Value.Length).Aggregate("", (s, acc) => s + acc);
             }
-            
-            for (var i = 0; i < expression.Length; i++)
-            {
-                
-                
-                
-                //if (symbol is '+')
-                //    tokens.Add(new Token(symbol.ToString(), Token.Forma.Plus));
-                //else if (int.TryParse(symbol.ToString(), out int num))
-                //{
-                //    string number = num.ToString();
-                //    int j = i + 1;
-                //    for (; j < expression.Length; j++)
-                //    {
-                //        string tailOfNumber = expression[j].ToString();
-                //        if (!int.TryParse(tailOfNumber, out _))
-                //            break;
-                //        number += tailOfNumber;
-                //    }
-                //    i = j - 1;
-                //    tokens.Add(new Token(number, Token.Forma.Number));
-                //}
-            }
             return tokens;
         }
     }
