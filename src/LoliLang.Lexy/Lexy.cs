@@ -25,29 +25,26 @@ namespace LoliLang.Lexy
 
         public IEnumerable<Token> LookAt(string expression)
         {
-            expression = expression.Trim();
             var tokens = new List<Token>();
-            var amountOfSkipChars = 0;
 
             while (expression.Length > 0)
             {
                 var symbol = expression.First();
                 var sub = expression.Substring(expression.IndexOf(symbol), expression.Length);
                 var token = _rules.TransformingSpellOn(symbol, sub, out _);
+                var amountOfSkipChars = 1;
                 if (token.HasValue)
                 {
                     tokens.Add(token.Value);
                     amountOfSkipChars = token.Value.Value.Length;
                 }
-                else
-                    amountOfSkipChars = 1;
                 
                 expression = sub.Skip(amountOfSkipChars).Aggregate("", (s, acc) => s + acc);
             }
             return tokens;
         }
     }
-   internal static class LexyParsingMagick
+   public static class LexyParsingMagick
    {
        public static readonly List<IParsingRule> RulesBook = new()
        {
@@ -75,5 +72,11 @@ namespace LoliLang.Lexy
            errors = errs;
            return result;
        }
+
+       public static IEnumerable<Token> EyeOfTruth(this IEnumerable<Token> line)
+       {
+           throw new NotImplementedException();
+       }
+
    }
 }

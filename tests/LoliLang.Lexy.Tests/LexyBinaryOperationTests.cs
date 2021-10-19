@@ -23,6 +23,7 @@ namespace LoliLang.Lexy.Tests
                 new ("69", Token.Forma.Number)
             });
         }
+        
         [Fact]
         public void LootAt_WithOneSubTwoString_ReturnsListOfTokens()
         {
@@ -39,6 +40,7 @@ namespace LoliLang.Lexy.Tests
                 new ("69", Token.Forma.Number)
             });
         }
+        
         [Fact]
         public void LootAt_WithOneMulTwoString_ReturnsListOfTokens()
         {
@@ -77,14 +79,14 @@ namespace LoliLang.Lexy.Tests
             var lexy = new Lexy();
             
             //act
-            var answer = lexy.LookAt("1+2 - 3* 4 / 5");
+            var answer = lexy.LookAt("1+23 - 3* 4 / 5");
 
             //assert
             answer.Should().BeEquivalentTo(new List<Token>()
             {
                 new ("1", Token.Forma.Number),
                 new ("+", Token.Forma.Plus),
-                new ("2", Token.Forma.Number),
+                new ("23", Token.Forma.Number),
                 new ("-", Token.Forma.Sub),
                 new ("3", Token.Forma.Number),
                 new ("*", Token.Forma.Mul),
