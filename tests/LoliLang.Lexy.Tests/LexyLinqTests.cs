@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using FluentAssertions;
-using LoliLang.Lexy.ParserRules;
+using LoliLang.Lexy.ParsingRules;
 using Moq;
 using Xunit;
 
@@ -11,16 +12,23 @@ namespace LoliLang.Lexy.Tests
         [Fact]
         public void TryToLookAt_WithOnePlusTwo_ReturnsTokens()
         {
-            var mockNums = new Mock<IParserRule>();
-            var plusMockRule = new Mock<IParserRule>();
+            var mockNums = new Mock<IParsingRule>();
+            var plusMockRule = new Mock<IParsingRule>();
 
-            var rules = new List<IParserRule> {mockNums.Object, plusMockRule.Object};
+            mockNums
+                .Setup(x => x.TryOn(It.IsAny<char>(), It.IsAny<string>()))
+                .Returns(new Token("NUMBER", Token.Forma.Number));
+            plusMockRule
+                .Setup(x => x.TryOn('+', It.IsAny<string>()))
+                .Returns(new Token("PLUS", Token.Forma.Plus));
+
+            var rules = new List<IParsingRule> {mockNums.Object, plusMockRule.Object};
 
             rules.TryToLookAt("420+69").Should().BeEquivalentTo(new[]
             {
-                new Token("420", Token.Forma.Number),
-                new Token("+", Token.Forma.Plus),
-                new Token("69", Token.Forma.Number)
+                new Token("NUMBER", Token.Forma.Number),
+                new Token("PLUS", Token.Forma.Plus),
+                new Token("NUMBER", Token.Forma.Number)
             });
         }
     }

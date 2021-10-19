@@ -9,5 +9,8 @@
     &lt;TestId&gt;xUnit::E480DD1E-67A1-4DA4-BF24-2056637E04A2::net5.0::LoliLang.Lexy.Tests.LexyUnitTest.Test1&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::E480DD1E-67A1-4DA4-BF24-2056637E04A2::net5.0::LoliLang.Lexy.Tests.LexyTests.LootAt_WithOnePlusTwoString_ReturnsListOfTokens&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::E480DD1E-67A1-4DA4-BF24-2056637E04A2::net5.0::LoliLang.Lexy.Tests.LexyLinqTests.TryToLookAt_WithOnePlusTwo_ReturnsTokens&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::E480DD1E-67A1-4DA4-BF24-2056637E04A2::net5.0::LoliLang.Lexy.Tests.LexyTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::E480DD1E-67A1-4DA4-BF24-2056637E04A2::net5.0::LoliLang.Lexy.Tests.LexyBinaryOperationTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::E480DD1E-67A1-4DA4-BF24-2056637E04A2::net5.0::LoliLang.Lexy.Tests.LexyBinaryOperationsTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
