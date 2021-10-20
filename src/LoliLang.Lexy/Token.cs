@@ -13,11 +13,11 @@ namespace LoliLang.Lexy
 
         public enum Forma: byte
         {
-            Number,
-            Plus,
-            Sub,
-            Div,
-            Mul,
+            Number = 0,
+            Plus = 1,
+            Sub  = 2,
+            Div  = 3,
+            Mul  = 4,
         }
     }
 }

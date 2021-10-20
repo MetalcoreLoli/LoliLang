@@ -1,11 +1,11 @@
 using System;
 using FluentAssertions;
-using LoliLang.Core.Builders;
-using LoliLang.Core.Mem;
+using LoliLang.Dryad.Builders;
+using LoliLang.Dryad.Mem;
 using Moq;
 using Xunit;
 
-namespace LoliLang.Core.Tests
+namespace LoliLang.Dryad.Tests
 {
     public class LoliUnitTests
     {
@@ -17,7 +17,7 @@ namespace LoliLang.Core.Tests
         {
             _expressionBuilder = new Mock<IExpressionBuilder>();
             _valueTypeStack = new Mock<ILoliStack<ValueTypeExpression>>();
-            var loli = new Loli(_valueTypeStack.Object, _expressionBuilder.Object);
+            var loli = new Daphnaie(_valueTypeStack.Object, _expressionBuilder.Object);
 
             var three = new Mock<Expression>();
             three
@@ -35,7 +35,7 @@ namespace LoliLang.Core.Tests
         {
             _valueTypeStack = new Mock<ILoliStack<ValueTypeExpression>>();
             _expressionBuilder = new Mock<IExpressionBuilder>();
-            var loli = new Loli(_valueTypeStack.Object, _expressionBuilder.Object);
+            var loli = new Daphnaie(_valueTypeStack.Object, _expressionBuilder.Object);
 
             var one = new Mock<TypeExpression>();
             var two = new Mock<TypeExpression>();

@@ -1,15 +1,15 @@
 using System;
-using LoliLang.Core.Builders;
-using LoliLang.Core.Mem;
+using LoliLang.Dryad.Builders;
+using LoliLang.Dryad.Mem;
 
-namespace LoliLang.Core
+namespace LoliLang.Dryad
 {
-    public class Loli
+    public class Daphnaie
     {
         private readonly ILoliStack<ValueTypeExpression> _stack;
         private readonly IExpressionBuilder _expressionBuilder;
 
-        public Loli(ILoliStack<ValueTypeExpression> stack, IExpressionBuilder expressionBuilder)
+        public Daphnaie(ILoliStack<ValueTypeExpression> stack, IExpressionBuilder expressionBuilder)
         {
             _stack = stack 
                      ?? throw new NullReferenceException("Implementation of ILoliStack wasn't passed thought constructor or was null");

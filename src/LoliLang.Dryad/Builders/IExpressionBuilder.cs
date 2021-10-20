@@ -1,4 +1,4 @@
-namespace LoliLang.Core.Builders
+namespace LoliLang.Dryad.Builders
 {
     public interface IExpressionBuilder
     {

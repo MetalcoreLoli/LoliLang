@@ -3,7 +3,7 @@ using FluentAssertions;
 using Moq;
 using Xunit;
 
-namespace LoliLang.Core.Tests
+namespace LoliLang.Dryad.Tests
 {
     public class AddExpressionTests
     {

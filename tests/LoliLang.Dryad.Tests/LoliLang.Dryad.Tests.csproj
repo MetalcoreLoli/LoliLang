@@ -4,6 +4,8 @@
         <TargetFramework>net5.0</TargetFramework>
 
         <IsPackable>false</IsPackable>
+
+        <RootNamespace>LoliLang.Core.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -22,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\LoliLang.Core\LoliLang.Core.csproj" />
+      <ProjectReference Include="..\..\src\LoliLang.Dryad\LoliLang.Dryad.csproj" />
     </ItemGroup>
 
 </Project>

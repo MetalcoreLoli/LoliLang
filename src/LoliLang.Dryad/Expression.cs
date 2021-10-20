@@ -1,4 +1,4 @@
-﻿namespace LoliLang.Core
+﻿namespace LoliLang.Dryad
 {
     public abstract class Expression
     {

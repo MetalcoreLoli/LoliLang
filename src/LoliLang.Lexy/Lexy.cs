@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LoliLang.Dryad;
+using LoliLang.Lexy.Exceptions;
 using LoliLang.Lexy.ParsingRules;
 
 namespace LoliLang.Lexy
@@ -18,10 +20,52 @@ namespace LoliLang.Lexy
             _rules = rules;
         }
 
-        public IEnumerable<string> AnswersOn(string s)
+        public IEnumerable<Expression> AnswersOn(string s)
         {
+            var validExpression= LookAt(s).EyeOfTruth().ToList();
+            var daphnaie = new Daphnaie(null, null);
+            //var tree = daphnaie.GrowTreeFrom();
+            for (int i = 0; i < validExpression.Count(); i++)
+            {
+                var token = validExpression[i];
+                var expr = ExpressionParserHelper(validExpression);
+            }
             throw new NotImplementedException();
         }
+
+
+        public static Expression ExpressionParserHelper(IEnumerable<Token> tokens)
+        {
+            return tokens.FirstOrDefault() switch
+            {
+                {Type: Token.Forma.Number} token => new NumberExpression(token.Value),
+                {Type: var forma} when forma is <= Token.Forma.Plus and <= Token.Forma.Mul => BinaryExpressionHelper(tokens),
+                _ => null
+            };
+        }
+
+        private static Expression BinaryExpressionHelper(IEnumerable<Token> tokens)
+        {
+            int IndexOfCurrentToken(Token t) => tokens.ToList().IndexOf(t);
+            Token FirstToken(Token t) => tokens.ToList()[IndexOfCurrentToken(t) - 1];
+            Token SecondToken(Token t) => tokens.ToList()[IndexOfCurrentToken(t) + 1];
+
+            return tokens.FirstOrDefault() switch
+            {
+                {Type: Token.Forma.Plus} token =>
+                    new AddExpression(
+                        (TypeExpression) ExpressionParserHelper(new[] {FirstToken(token)}),
+                        (TypeExpression) ExpressionParserHelper(new[] {SecondToken(token)})),
+                {Type: Token.Forma.Sub} token => throw new NotImplementedException(
+                    $"Expression for {token.Type} is not implemented"),
+                {Type: Token.Forma.Div} token => throw new NotImplementedException(
+                    $"Expression for {token.Type} is not implemented"),
+                {Type: Token.Forma.Mul} token => throw new NotImplementedException(
+                    $"Expression for {token.Type} is not implemented"),
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+
 
         public IEnumerable<Token> LookAt(string expression)
         {
@@ -75,7 +119,32 @@ namespace LoliLang.Lexy
 
        public static IEnumerable<Token> EyeOfTruth(this IEnumerable<Token> line)
        {
-           throw new NotImplementedException();
+           var tokens = line as Token[] ?? line.ToArray();
+           for(int i = 0; i < tokens.Count(); i += 2)
+           {
+               var token = tokens[i];
+               if (token.Type is < Token.Forma.Plus and <= Token.Forma.Mul)
+                   throw new MissingOperandException(line.Aggregate("", (s, acc) => s + acc.Value));
+           }
+           return line;
+       }
+
+
+       public static IEnumerable<Token> NormBinaryExpression(this IEnumerable<Token> expression)
+       {
+           if (expression.Count() != 3)
+               throw new ArgumentOutOfRangeException($"{expression.Count()} is not equal to 3");
+           
+           var normExpression = new List<Token>();
+
+           Token? operation = expression.FirstOrDefault(x => x.Type is >= Token.Forma.Plus and <= Token.Forma.Mul);
+           if (!operation.HasValue)
+               throw new NullReferenceException($"There is not binary operation in {expression}");
+           
+           normExpression.Add(operation.Value);
+           normExpression.AddRange(expression.Where(x => x.Type != operation.Value.Type));
+           
+           return normExpression;
        }
 
    }

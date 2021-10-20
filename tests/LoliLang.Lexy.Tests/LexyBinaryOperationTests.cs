@@ -73,6 +73,8 @@ namespace LoliLang.Lexy.Tests
                 new ("69", Token.Forma.Number)
             });
         }
+        
+        
         [Fact]
         public void LootAt_WithAllBinaryOperationInString_ReturnsListOfTokens()
         {

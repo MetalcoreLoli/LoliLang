@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoliLang.Core", "src\LoliLang.Core\LoliLang.Core.csproj", "{24FD84C2-408C-42EC-81D8-70C5AEE94721}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoliLang.Dryad", "src\LoliLang.Dryad\LoliLang.Dryad.csproj", "{24FD84C2-408C-42EC-81D8-70C5AEE94721}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoliLang.Core.Tests", "tests\LoliLang.Core.Tests\LoliLang.Core.Tests.csproj", "{859481CF-8600-4858-BECC-6CF14FEC5BF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoliLang.Dryad.Tests", "tests\LoliLang.Dryad.Tests\LoliLang.Dryad.Tests.csproj", "{859481CF-8600-4858-BECC-6CF14FEC5BF5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoliLang.Lexy", "src\LoliLang.Lexy\LoliLang.Lexy.csproj", "{D4044B00-8E8A-4D35-A412-3951050843D9}"
 EndProject

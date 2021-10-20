@@ -13,13 +13,13 @@ namespace LoliLang.Lexy.Tests
         {
             var lexy = new Lexy();
 
-            var tokens = lexy.LookAt("12+");
+            var tokens = lexy.LookAt("12 + 14 * 9 /");
 
             Action act = () => tokens.EyeOfTruth();
             act
                 .Should()
                 .Throw<MissingOperandException>()
-                .WithMessage("Missing operand in expression \"12+\"");
+                .WithMessage("Missing operand in expression \"12+14*9/\"");
         }
     }
 }
