@@ -1,17 +1,4 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9d37868b_002D28b7_002D427f_002Dac54_002Df3ea0b62245a/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ToString_WithLeftUndRightExpressions_ReturnsAddOnePlusTwoTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::859481CF-8600-4858-BECC-6CF14FEC5BF5::net5.0::LoliLang.Core.Tests.AddExpressionTests.ToString_WithLeftUndRightExpressions_ReturnsAddOnePlusTwoTest&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::859481CF-8600-4858-BECC-6CF14FEC5BF5::net5.0::LoliLang.Core.Tests.AddExpressionTests.Constructor_WithNulls_ThrowsNullReferencesException&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::859481CF-8600-4858-BECC-6CF14FEC5BF5::net5.0::LoliLang.Core.Tests.AddExpressionTests.Reduce_WithOneUndTwo_ReturnsThree&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::859481CF-8600-4858-BECC-6CF14FEC5BF5::net5.0::LoliLang.Core.Tests.LoliUnitTests.SimpleText&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::859481CF-8600-4858-BECC-6CF14FEC5BF5::net5.0::LoliLang.Core.Tests.LoliUnitTests&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::E480DD1E-67A1-4DA4-BF24-2056637E04A2::net5.0::LoliLang.Lexy.Tests.LexyUnitTest.Test1&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::E480DD1E-67A1-4DA4-BF24-2056637E04A2::net5.0::LoliLang.Lexy.Tests.LexyTests.LootAt_WithOnePlusTwoString_ReturnsListOfTokens&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::E480DD1E-67A1-4DA4-BF24-2056637E04A2::net5.0::LoliLang.Lexy.Tests.LexyLinqTests.TryToLookAt_WithOnePlusTwo_ReturnsTokens&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::E480DD1E-67A1-4DA4-BF24-2056637E04A2::net5.0::LoliLang.Lexy.Tests.LexyTests&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::E480DD1E-67A1-4DA4-BF24-2056637E04A2::net5.0::LoliLang.Lexy.Tests.LexyBinaryOperationTests&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::E480DD1E-67A1-4DA4-BF24-2056637E04A2::net5.0::LoliLang.Lexy.Tests.LexyBinaryOperationsTests&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::E480DD1E-67A1-4DA4-BF24-2056637E04A2::net5.0::LoliLang.Lexy.Tests.LexyEyeOfTruthTests.EyeOfTruth_WithWrongExpression_ThrowsMissingOperandException&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
+  &lt;Project Location="/home/danielf/RiderProjects/LoliLang/tests/LoliLang.Spell.Tests" Presentation="&amp;lt;LoliLang.Spell.Tests&amp;gt;" /&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

@@ -1,12 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoliLang.Dryad", "src\LoliLang.Dryad\LoliLang.Dryad.csproj", "{24FD84C2-408C-42EC-81D8-70C5AEE94721}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoliLang.Spell", "src\LoliLang.Spell\LoliLang.Spell.csproj", "{D4044B00-8E8A-4D35-A412-3951050843D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoliLang.Dryad.Tests", "tests\LoliLang.Dryad.Tests\LoliLang.Dryad.Tests.csproj", "{859481CF-8600-4858-BECC-6CF14FEC5BF5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoliLang.Lexy", "src\LoliLang.Lexy\LoliLang.Lexy.csproj", "{D4044B00-8E8A-4D35-A412-3951050843D9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoliLang.Lexy.Tests", "tests\LoliLang.Lexy.Tests\LoliLang.Lexy.Tests.csproj", "{E480DD1E-67A1-4DA4-BF24-2056637E04A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoliLang.Spell.Tests", "tests\LoliLang.Spell.Tests\LoliLang.Spell.Tests.csproj", "{E480DD1E-67A1-4DA4-BF24-2056637E04A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,14 +10,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{24FD84C2-408C-42EC-81D8-70C5AEE94721}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{24FD84C2-408C-42EC-81D8-70C5AEE94721}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{24FD84C2-408C-42EC-81D8-70C5AEE94721}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{24FD84C2-408C-42EC-81D8-70C5AEE94721}.Release|Any CPU.Build.0 = Release|Any CPU
-		{859481CF-8600-4858-BECC-6CF14FEC5BF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{859481CF-8600-4858-BECC-6CF14FEC5BF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{859481CF-8600-4858-BECC-6CF14FEC5BF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{859481CF-8600-4858-BECC-6CF14FEC5BF5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D4044B00-8E8A-4D35-A412-3951050843D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D4044B00-8E8A-4D35-A412-3951050843D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4044B00-8E8A-4D35-A412-3951050843D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
