@@ -5,7 +5,7 @@ using LoliLang.Spell.Lexy.ParsingRules;
 using Moq;
 using Xunit;
 
-namespace LoliLang.Spell.Tests
+namespace LoliLang.Spell.Tests.LexysTests
 {
     public class LexyLinqTests
     {

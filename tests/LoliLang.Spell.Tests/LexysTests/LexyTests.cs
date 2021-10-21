@@ -2,7 +2,7 @@ using FluentAssertions;
 using LoliLang.Spell.Lexy;
 using Xunit;
 
-namespace LoliLang.Spell.Tests
+namespace LoliLang.Spell.Tests.LexysTests
 {
     public class LexyTests
     {

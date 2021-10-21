@@ -4,7 +4,7 @@ using LoliLang.Spell.Lexy;
 using LoliLang.Spell.Lexy.Exceptions;
 using Xunit;
 
-namespace LoliLang.Spell.Tests
+namespace LoliLang.Spell.Tests.LexysTests
 {
     public class LexyEyeOfTruthTests
     {
