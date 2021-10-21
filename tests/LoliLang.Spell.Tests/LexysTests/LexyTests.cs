@@ -16,6 +16,7 @@ namespace LoliLang.Spell.Tests.LexysTests
             var result = Spell.Lexy.Lexy.ExpressionParserHelper(expression);
 
             result.ToString().Should().BeEquivalentTo("420 + 69");
+            result.Reduce().ToString().Should().BeEquivalentTo("489");
         }
     }
 }

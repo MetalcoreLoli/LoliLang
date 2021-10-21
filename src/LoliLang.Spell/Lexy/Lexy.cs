@@ -51,8 +51,8 @@ namespace LoliLang.Spell.Lexy
         private static Expression BinaryExpressionHelper(IEnumerable<Token> tokens)
         {
             int IndexOfCurrentToken(Token t) => tokens.ToList().IndexOf(t);
-            Token FirstToken(Token t) => tokens.ToList()[IndexOfCurrentToken(t) - 1];
-            Token SecondToken(Token t) => tokens.ToList()[IndexOfCurrentToken(t) + 1];
+            Token FirstToken(Token t) => tokens.ToList()[IndexOfCurrentToken(t) + 1];
+            Token SecondToken(Token t) => tokens.ToList()[IndexOfCurrentToken(t) + 2];
 
             return tokens.FirstOrDefault() switch
             {
