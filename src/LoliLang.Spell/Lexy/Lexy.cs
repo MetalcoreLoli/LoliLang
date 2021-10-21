@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LoliLang.Spell.Dryad.Mem;
 using LoliLang.Spell.Lexy.Exceptions;
 using LoliLang.Spell.Lexy.ParsingRules;
 using AddExpression = LoliLang.Spell.Dryad.AddExpression;
@@ -24,53 +25,15 @@ namespace LoliLang.Spell.Lexy
             _rules = rules;
         }
 
-        public IEnumerable<Expression> AnswersOn(string s)
+        public Expression AnswersOn(string s)
         {
-            var validExpression= LookAt(s).EyeOfTruth().ToList();
-            var daphnaie = new Daphnaie(null, null);
-            //var tree = daphnaie.GrowTreeFrom();
-            for (int i = 0; i < validExpression.Count(); i++)
-            {
-                var token = validExpression[i];
-                var expr = ExpressionParserHelper(validExpression);
-            }
-            throw new NotImplementedException();
+            var validExpression= LookAt(s)/*.EyeOfTruth().*/.ToList();
+            var daphnaie = new Daphnaie(new LoliStack(), null);
+            var tree = daphnaie.GrowTreeFrom(validExpression);
+            var result = daphnaie.SayWhatIsThe(tree);
+            return daphnaie.SayWhatIsThe(tree);
         }
-
-
-        public static Expression ExpressionParserHelper(IEnumerable<Token> tokens)
-        {
-            return tokens.FirstOrDefault() switch
-            {
-                {Type: Token.Forma.Number} token => new NumberExpression(token.Value),
-                {Type: var forma} when forma is <= Token.Forma.Plus and <= Token.Forma.Mul => BinaryExpressionHelper(tokens),
-                _ => null
-            };
-        }
-
-        private static Expression BinaryExpressionHelper(IEnumerable<Token> tokens)
-        {
-            int IndexOfCurrentToken(Token t) => tokens.ToList().IndexOf(t);
-            Token FirstToken(Token t) => tokens.ToList()[IndexOfCurrentToken(t) + 1];
-            Token SecondToken(Token t) => tokens.ToList()[IndexOfCurrentToken(t) + 2];
-
-            return tokens.FirstOrDefault() switch
-            {
-                {Type: Token.Forma.Plus} token =>
-                    new AddExpression(
-                        (TypeExpression) ExpressionParserHelper(new[] {FirstToken(token)}),
-                        (TypeExpression) ExpressionParserHelper(new[] {SecondToken(token)})),
-                {Type: Token.Forma.Sub} token => throw new NotImplementedException(
-                    $"Expression for {token.Type} is not implemented"),
-                {Type: Token.Forma.Div} token => throw new NotImplementedException(
-                    $"Expression for {token.Type} is not implemented"),
-                {Type: Token.Forma.Mul} token => throw new NotImplementedException(
-                    $"Expression for {token.Type} is not implemented"),
-                _ => throw new ArgumentOutOfRangeException()
-            };
-        }
-
-
+        
         public IEnumerable<Token> LookAt(string expression)
         {
             var tokens = new List<Token>();

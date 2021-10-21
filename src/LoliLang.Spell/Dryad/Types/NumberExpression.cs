@@ -13,17 +13,17 @@ namespace LoliLang.Spell.Dryad.Types
 
         public override Expression Reduce() => this;
 
-        public override TypeExpression Add(TypeExpression b) => OperationHelper(b, (l, r) => l + r);
-        public override TypeExpression Sub(TypeExpression b) => OperationHelper(b, (l, r) => l - r);
-        public override TypeExpression Mul(TypeExpression b) => OperationHelper(b, (l, r) => l * r);
-        public override TypeExpression Div(TypeExpression b) => OperationHelper(b, (l, r) => l / r);
+        public override Expression Add(Expression b) => OperationHelper(b, (l, r) => l + r);
+        public override Expression Sub(Expression b) => OperationHelper(b, (l, r) => l - r);
+        public override Expression Mul(Expression b) => OperationHelper(b, (l, r) => l * r);
+        public override Expression Div(Expression b) => OperationHelper(b, (l, r) => l / r);
 
         public override string ToString() => Value;
 
         #region Private Members
 
 
-        private TypeExpression OperationHelper(TypeExpression b, Func<int, int, int> operation)
+        private Expression OperationHelper(Expression b, Func<int, int, int> operation)
         {
             return b switch
             {

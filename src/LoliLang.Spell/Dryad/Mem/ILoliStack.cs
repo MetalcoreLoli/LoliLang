@@ -6,5 +6,7 @@ namespace LoliLang.Spell.Dryad.Mem
     {
         T Pop();
         ILoliStack<T> Push(T value);
+
+        ILoliStack<T> RemoveNull();
     }
 }

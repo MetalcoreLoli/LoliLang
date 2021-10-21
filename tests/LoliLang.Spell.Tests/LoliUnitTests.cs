@@ -11,13 +11,13 @@ namespace LoliLang.Spell.Tests
     public class LoliUnitTests
     {
         private Mock<IExpressionBuilder> _expressionBuilder;
-        private Mock<ILoliStack<ValueTypeExpression>> _valueTypeStack;
+        private Mock<ILoliStack<Expression>> _valueTypeStack;
 
         [Fact]
         public void SayWhatIsThe_WithThreeExpression_ReturnsThree()
         {
             _expressionBuilder = new Mock<IExpressionBuilder>();
-            _valueTypeStack = new Mock<ILoliStack<ValueTypeExpression>>();
+            _valueTypeStack = new Mock<ILoliStack<Expression>>();
             var loli = new Daphnaie(_valueTypeStack.Object, _expressionBuilder.Object);
 
             var three = new Mock<Expression>();
@@ -34,7 +34,7 @@ namespace LoliLang.Spell.Tests
         [Fact]
         public void SayWhatIsThe_WithBinaryExpression_ReturnsTypeExpression()
         {
-            _valueTypeStack = new Mock<ILoliStack<ValueTypeExpression>>();
+            _valueTypeStack = new Mock<ILoliStack<Expression>>();
             _expressionBuilder = new Mock<IExpressionBuilder>();
             var loli = new Daphnaie(_valueTypeStack.Object, _expressionBuilder.Object);
 
