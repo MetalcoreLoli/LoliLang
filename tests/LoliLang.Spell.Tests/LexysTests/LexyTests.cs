@@ -17,7 +17,7 @@ namespace LoliLang.Spell.Tests.LexysTests
         }
         
         [Fact]
-        public void AnswerOn_WithValidSubExpression_ReturnAddExpression()
+        public void AnswerOn_WithValidSubExpression_ReturnsSubExpression()
         {
             var lexy = new Spell.Lexy.Lexy();
             var  result= lexy.AnswersOn("12 - 2");

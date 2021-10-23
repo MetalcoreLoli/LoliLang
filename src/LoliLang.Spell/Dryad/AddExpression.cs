@@ -8,12 +8,11 @@ namespace LoliLang.Spell.Dryad
         public AddExpression(Expression left, Expression right)
             : base(left, right)
         {
-            Value = Reduce().Value;
         }
 
         public override Expression Reduce()
         {
-            var result = (Left as TypeExpression).Add(Right);
+            var result = (Left.Reduce() as TypeExpression).Add(Right.Reduce());
             return result;
         }
 

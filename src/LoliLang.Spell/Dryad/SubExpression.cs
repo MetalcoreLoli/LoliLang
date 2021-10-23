@@ -7,10 +7,9 @@ namespace LoliLang.Spell.Dryad
         public SubExpression(Expression left, Expression right)
             : base(left, right)
         {
-            Value = Reduce().Value;
         }
 
-        public override Expression Reduce() => (Left as TypeExpression)?.Sub(Right);
+        public override Expression Reduce() => (Left.Reduce() as TypeExpression)?.Sub(Right.Reduce());
         public override string ToString() => $"{Left} - {Right}";
     }
 }

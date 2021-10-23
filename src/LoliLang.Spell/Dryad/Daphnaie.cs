@@ -33,35 +33,33 @@ namespace LoliLang.Spell.Dryad
 
         public Expression GrowTreeFrom(IEnumerable<Token> validExpression)
         {
-            return GrowTreeHelper(validExpression, _stack, 0);
+            List<Token> expr = validExpression.ToList();
+            return GrowTreeHelper(null, expr);
         }
 
         private Expression GrowTreeHelper(
-            IEnumerable<Token> validExpression, 
-            ILoliStack<Expression> stack, 
-            int currentTokenIdx)
+            Expression current,
+            List<Token> expression 
+            )
         {
-            var expression = validExpression as Token[] ?? validExpression.ToArray();
-            if (!expression.Any()) return _stack.RemoveNull().Pop();
-            return expression.First() switch
+            if (!expression.Any()) return current;
+            var token = expression.First();
+            return token switch
             {
-                {Type: Token.Forma.Number} t => 
-                    GrowTreeHelper (expression.Skip(1),
-                        stack.Push(new NumberExpression(t.Value)),
-                        currentTokenIdx + 1),
-                {Type: Token.Forma.Plus} t => 
-                    GrowTreeHelper(expression.Skip(2), 
-                        stack
-                            .RemoveNull()
-                            .Push(new AddExpression(stack.Pop(),GrowTreeHelper(expression.Skip(1), stack, currentTokenIdx + 1))),
-                        currentTokenIdx),
-                {Type: Token.Forma.Sub} t => 
-                    GrowTreeHelper(expression.Skip(2), 
-                        stack
-                            .RemoveNull()
-                            .Push(new SubExpression(stack.Pop(),GrowTreeHelper(expression.Skip(1), stack, currentTokenIdx + 1))),
-                        currentTokenIdx),
+                {Type: Token.Forma.Number} t => GrowTreeHelper(new NumberExpression(t.Value), MoveBy(1, expression)),
+                {Type: Token.Forma.Plus} t => GrowTreeHelper(
+                    new AddExpression(current, GrowTreeRightBranch(expression)), MoveBy(2, expression)),
+                {Type: Token.Forma.Sub} t => GrowTreeHelper(
+                    new SubExpression(current, GrowTreeRightBranch(expression)), MoveBy(2, expression)),
+                _ => throw new ArgumentOutOfRangeException(nameof(token))
             };
         }
+
+        private Expression GrowTreeRightBranch(IEnumerable<Token> expression)
+        {
+            return GrowTreeHelper(null, new List<Token>() {MoveBy(1, expression).First()});
+        }
+        
+        private List<Token> MoveBy (int step, IEnumerable<Token> expression) => expression.Skip(step).ToList();
     }
 }

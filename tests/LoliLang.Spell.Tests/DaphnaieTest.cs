@@ -10,17 +10,17 @@ namespace LoliLang.Spell.Tests
     {
 
         [Fact]
-        public void SimpleText()
+        public void GrowTreeFrom_WithValidExpression_ReturnsBinaryTreeWhereReduceResultIsNumberExpression()
         {
             var daphnaie = new Daphnaie(new LoliStack(), null);
             var lexy = new Lexy.Lexy();
-            var tokens = lexy.LookAt("12 - 2 + 1");
+            var tokens = lexy.LookAt("12 - 2 + 1"); // (- 12 (+ 2 1))
             
             var result = daphnaie.GrowTreeFrom(tokens);
+            var resultOfReduction = result.Reduce();
 
-            var reduction = result.Reduce();
-
-            reduction.Should().BeOfType<NumberExpression>();
+            resultOfReduction.Should().BeOfType<NumberExpression>();
+            resultOfReduction.Value.Should().BeEquivalentTo("11");
             result.ToString().Should().BeEquivalentTo("12 - 2 + 1");
         }
     }

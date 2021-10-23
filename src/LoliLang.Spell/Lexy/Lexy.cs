@@ -4,11 +4,8 @@ using System.Linq;
 using LoliLang.Spell.Dryad.Mem;
 using LoliLang.Spell.Lexy.Exceptions;
 using LoliLang.Spell.Lexy.ParsingRules;
-using AddExpression = LoliLang.Spell.Dryad.AddExpression;
 using Daphnaie = LoliLang.Spell.Dryad.Daphnaie;
 using Expression = LoliLang.Spell.Dryad.Expression;
-using NumberExpression = LoliLang.Spell.Dryad.Types.NumberExpression;
-using TypeExpression = LoliLang.Spell.Dryad.Types.TypeExpression;
 
 namespace LoliLang.Spell.Lexy
 {
@@ -31,7 +28,7 @@ namespace LoliLang.Spell.Lexy
             var daphnaie = new Daphnaie(new LoliStack(), null);
             var tree = daphnaie.GrowTreeFrom(validExpression);
             var result = daphnaie.SayWhatIsThe(tree);
-            return daphnaie.SayWhatIsThe(tree);
+            return daphnaie.SayWhatIsThe(tree).Reduce();
         }
         
         public IEnumerable<Token> LookAt(string expression)

@@ -27,7 +27,7 @@ namespace LoliLang.Spell.Dryad.Types
         {
             return b switch
             {
-                 NumberExpression numberExpression => 
+                 Expression numberExpression => 
                      new NumberExpression((operation(Number(this), Number(b))).ToString()),
                 _ => throw new StrongTypingException($"{b} is of NumberExpression type")
             };

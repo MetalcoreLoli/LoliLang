@@ -7,7 +7,7 @@ namespace LoliLang.Spell.Dryad
         public DivExpression(Types.TypeExpression left, Types.TypeExpression right)
             : base(left, right) { }
 
-        public override Expression Reduce() => (Left as TypeExpression)?.Div(Right);
+        public override Expression Reduce() => (Left.Reduce() as TypeExpression)?.Div(Right);
         public override string ToString() => $"{Left} / {Right}";
     }
 }
