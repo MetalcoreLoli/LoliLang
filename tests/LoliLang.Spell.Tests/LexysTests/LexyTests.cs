@@ -9,7 +9,7 @@ namespace LoliLang.Spell.Tests.LexysTests
     {
 
         [Fact]
-        public void AnswerOn_WithValidAddExpression_ReturnAddExpression()
+        public void AnswerOn_WithValidAddExpression_ReturnNumberExpression()
         {
             var lexy = new Spell.Lexy.Lexy();
             var  result= lexy.AnswersOn("420+69");
@@ -17,7 +17,7 @@ namespace LoliLang.Spell.Tests.LexysTests
         }
         
         [Fact]
-        public void AnswerOn_WithValidSubExpression_ReturnsSubExpression()
+        public void AnswerOn_WithValidSubExpression_ReturnsNumberExpression()
         {
             var lexy = new Spell.Lexy.Lexy();
             var  result= lexy.AnswersOn("12 - 2");
@@ -25,10 +25,19 @@ namespace LoliLang.Spell.Tests.LexysTests
         }
         
         [Fact]
-        public void AnswerOn_WithValidSubUndAddExpression_ReturnAddExpression()
+        public void AnswerOn_WithValidSubUndAddExpression_ReturnNumberExpression()
         {
             var lexy = new Spell.Lexy.Lexy();
             var  result= lexy.AnswersOn("12 - 2 + 1");
+            result.Should().BeOfType<NumberExpression>();
+            result.Reduce().ToString().Should().BeEquivalentTo("11");
+        }
+        
+        [Fact]
+        public void AnswerOn_WithValidSubUndAddUndMulExpression_ReturnNumberExpression()
+        {
+            var lexy = new Spell.Lexy.Lexy();
+            var  result= lexy.AnswersOn("12 - 2 + 1 * 2 / 2");
             result.Should().BeOfType<NumberExpression>();
             result.Reduce().ToString().Should().BeEquivalentTo("11");
         }

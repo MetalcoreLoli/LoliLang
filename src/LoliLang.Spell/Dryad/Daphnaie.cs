@@ -51,6 +51,10 @@ namespace LoliLang.Spell.Dryad
                     new AddExpression(current, GrowTreeRightBranch(expression)), MoveBy(2, expression)),
                 {Type: Token.Forma.Sub} t => GrowTreeHelper(
                     new SubExpression(current, GrowTreeRightBranch(expression)), MoveBy(2, expression)),
+                {Type: Token.Forma.Mul} t => GrowTreeHelper(
+                    new MulExpression(current, GrowTreeRightBranch(expression)).Reduce(), MoveBy(2, expression)),
+                {Type: Token.Forma.Div} t => GrowTreeHelper(
+                    new DivExpression(current, GrowTreeRightBranch(expression)).Reduce(), MoveBy(2, expression)),
                 _ => throw new ArgumentOutOfRangeException(nameof(token))
             };
         }
