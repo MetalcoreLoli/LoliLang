@@ -62,6 +62,11 @@ namespace LoliLang.Spell.Lexy
     }
    internal static class LexyParsingMagick
    {
+       public static readonly List<string> ReservedWord = new List<string>() 
+       {
+           "if", "then", "else", " ", "+", "-", "/", "*",
+           ">", "<", "==", "=", "true", "false"
+       };
        public static readonly List<IParsingRule> RulesBook = new()
        {
            new NumberParsingRule(), 
@@ -72,10 +77,14 @@ namespace LoliLang.Spell.Lexy
            new EqParingRule(),
            new LtParingRule(),
            new GtParingRule(),
+           new VarNameParsingRule(),
+           new DefineParsingRule(),
            new UniqueParsingRule(Token.Forma.If, "if",(forma, value, word, context) 
-               =>  WordToToken(forma, value, word, context)),
+               =>  WordToToken(forma, value, word, context)
+           ),
            new UniqueParsingRule(Token.Forma.Then, "then",(forma, value, word, context) 
-               => WordToToken(forma, value, word, context)),
+               => WordToToken(forma, value, word, context)
+           ),
            new UniqueParsingRule(Token.Forma.Else, "else",(forma, value, word, context) 
                => WordToToken(forma, value, word, context)
            ),
@@ -136,7 +145,7 @@ namespace LoliLang.Spell.Lexy
            Token? result = default;
            foreach (var rule in rules)
            {
-               result = rule.TryOn(symbol, expression);
+               result = rule.TryOn(symbol.ToString(), expression);
                if (result.HasValue)
                    break;
                errs.Add($"rule {rule.GetType().Name} does not work on {symbol}");

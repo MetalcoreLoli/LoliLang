@@ -2,7 +2,7 @@ namespace LoliLang.Spell.Lexy.ParsingRules
 {
     internal class NumberParsingRule : IParsingRule
     {
-        public Token? TryOn(char symbol, string context)
+        public Token? TryOn(string symbol, string context)
         {
             var number = symbol.ToString();
             if (!int.TryParse(number, out _)) return default;

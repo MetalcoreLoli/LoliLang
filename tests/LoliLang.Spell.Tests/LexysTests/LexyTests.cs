@@ -50,6 +50,15 @@ namespace LoliLang.Spell.Tests.LexysTests
             result.Should().BeOfType<NumberExpression>();
             result.Reduce().ToString().Should().BeEquivalentTo("1");
         }
+        
+        [Fact]
+        public void AnswerOn_WithVarUndIfExpression_ReturnsVar()
+        {
+            var lexy = new Spell.Lexy.Lexy();
+            var  result= lexy.AnswerOn("a = if 1 == 1 then 1 else 0");
+
+            result.Should().BeEquivalentTo("1");
+        }
 
         [Fact]
         public void ParseWord_WithWordUndContext_ReturnsParsedWord()

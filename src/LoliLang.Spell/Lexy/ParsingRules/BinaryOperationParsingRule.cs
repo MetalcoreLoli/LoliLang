@@ -12,7 +12,7 @@ namespace LoliLang.Spell.Lexy.ParsingRules
             _forma = forma;
         }
 
-        public virtual Token? TryOn(char symbol, string context) => 
+        public virtual Token? TryOn(string symbol, string context) => 
             symbol.ToString() == _value ? new Token(_value.ToString(), _forma) : null;
     }
     
@@ -30,6 +30,6 @@ namespace LoliLang.Spell.Lexy.ParsingRules
             _tryOn = tryOn;
         }
 
-        public virtual Token? TryOn(char symbol, string context) => _tryOn(_forma, _value, symbol.ToString(), context);
+        public virtual Token? TryOn(string symbol, string context) => _tryOn(_forma, _value, symbol.ToString(), context);
     }
 }

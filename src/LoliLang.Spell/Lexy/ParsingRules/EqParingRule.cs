@@ -8,7 +8,7 @@ namespace LoliLang.Spell.Lexy.ParsingRules
         {
         }
 
-        public override Token? TryOn(char symbol, string context)
+        public override Token? TryOn(string symbol, string context)
         {
             string word = symbol.ToString();
             for (int i = 1; i < context.Length; i++)

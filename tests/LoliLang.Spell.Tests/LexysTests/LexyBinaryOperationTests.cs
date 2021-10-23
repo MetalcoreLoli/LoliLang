@@ -121,5 +121,30 @@ namespace LoliLang.Spell.Tests.LexysTests
                 new ("false", Token.Forma.False),
             });
         }
+        
+        [Fact]
+        public void LookAt_WithVarUndIfExpression_ReturnsListOfTokens()
+        {
+            
+            var lexy = new Spell.Lexy.Lexy();
+            
+            //act
+            var answer = lexy.LookAt("varName = if 1 == 1 then true else false");
+
+            //assert
+            answer.Should().BeEquivalentTo(new List<Token>()
+            {
+                new ("varName", Token.Forma.Var),
+                new ("=", Token.Forma.Define),
+                new ("if", Token.Forma.If),
+                new ("1", Token.Forma.Number),
+                new ("==", Token.Forma.Eq),
+                new ("1", Token.Forma.Number),
+                new ("then", Token.Forma.Then),
+                new ("true", Token.Forma.True),
+                new ("else", Token.Forma.Else),
+                new ("false", Token.Forma.False),
+            });
+        }
     }
 }

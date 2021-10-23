@@ -24,7 +24,9 @@ namespace LoliLang.Spell.Lexy
             Then,
             Else,
             True,
-            False
+            False,
+            Var,
+            Define,
         }
     }
 }

@@ -16,10 +16,10 @@ namespace LoliLang.Spell.Tests.LexysTests
             var plusMockRule = new Mock<IParsingRule>();
 
             mockNums
-                .Setup(x => x.TryOn(It.IsAny<char>(), It.IsAny<string>()))
+                .Setup(x => x.TryOn(It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(new Token("NUMBER", Token.Forma.Number));
             plusMockRule
-                .Setup(x => x.TryOn('+', It.IsAny<string>()))
+                .Setup(x => x.TryOn("+", It.IsAny<string>()))
                 .Returns(new Token("PLUS", Token.Forma.Add));
 
             var rules = new List<IParsingRule> {mockNums.Object, plusMockRule.Object};

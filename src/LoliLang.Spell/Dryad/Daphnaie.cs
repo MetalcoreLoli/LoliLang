@@ -54,13 +54,14 @@ namespace LoliLang.Spell.Dryad
             {
                 case {Type: Token.Forma.Number} t:
                     return GrowTreeHelper(_magickBook.NewOfType<NumberExpression>(t.Value), MoveBy(1, expression));
+                case {Type: Token.Forma.Var} t:
+                    return GrowTreeHelper(new VariableNameExpression(t.Value), MoveBy(1, expression));
                 case {Type: Token.Forma.True} t:
                     return GrowTreeHelper(new TrueExpression(), MoveBy(1, expression));
                 case {Type: Token.Forma.False} t:
                     return GrowTreeHelper(new FalseExpression(), MoveBy(1, expression));
                 case {Type: Token.Forma.If} t:
                 {
-                    
                     var conditionSubExpr = GetSubTreeFrom(t.Type, Token.Forma.Then, expression);
                     var leftSubExpr = GetSubTreeFrom(Token.Forma.Then, Token.Forma.Else, expression);
                     var rightSubExpr = expression.SkipWhile(x => x.Type != Token.Forma.Else).Skip(1).ToList();
@@ -74,6 +75,14 @@ namespace LoliLang.Spell.Dryad
                 case {Type: Token.Forma.Then}:
                 case {Type: Token.Forma.Else}:
                     return GrowTreeHelper(GrowTreeNextValue(expression), MoveBy(1, expression));
+                case {Type: Token.Forma.Define}:
+                {
+                    var rightSubExprBody = MoveBy(1, expression);
+                    var rightSubExpr = GrowTreeHelper(null, rightSubExprBody);
+                    var var = new DefineExpression(current, rightSubExpr);
+                    _stack.Push(var);
+                    return GrowTreeHelper(var, MoveBy(rightSubExprBody.Count + 1, expression));
+                }
                 case {Type: Token.Forma.Eq} t:
                     return GrowTreeHelper(new EqExpression(current, GrowTreeNextValue(expression)),
                         MoveBy(2, expression));

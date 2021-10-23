@@ -38,5 +38,21 @@ namespace LoliLang.Spell.Tests
             result.ToString().Should().BeEquivalentTo("if 1 == 1 then 1 else 0");
             resultOfReduction.Value.Should().BeEquivalentTo("1");
         }
+        
+        
+        [Fact]
+        public void GrowTreeFrom_WithValidVarUndIfExpression_ReturnsBinaryTreeWhereReduceResultIsNumberExpression()
+        {
+            var daphnaie = new Daphnaie();
+            var lexy = new Lexy.Lexy();
+            var tokens = lexy.LookAt("a = if 1 == 1 then 1 else 0"); 
+            
+            var result = daphnaie.GrowTreeFrom(tokens);
+            var resultOfReduction = result.Reduce();
+
+            resultOfReduction.Should().BeOfType<NumberExpression>();
+            result.ToString().Should().BeEquivalentTo("a = if 1 == 1 then 1 else 0");
+            resultOfReduction.Value.Should().BeEquivalentTo("1");
+        }
     }
 }
