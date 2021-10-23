@@ -13,8 +13,8 @@ namespace LoliLang.Spell.Dryad.Types
         {
             return Value switch
             {
-                "True" => new TrueExpression(),
-                "False" => new FalseExpression(),
+                "true" => new TrueExpression(),
+                "false" => new FalseExpression(),
             };
         }
 

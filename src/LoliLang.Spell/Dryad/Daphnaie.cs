@@ -54,6 +54,10 @@ namespace LoliLang.Spell.Dryad
             {
                 case {Type: Token.Forma.Number} t:
                     return GrowTreeHelper(_magickBook.NewOfType<NumberExpression>(t.Value), MoveBy(1, expression));
+                case {Type: Token.Forma.True} t:
+                    return GrowTreeHelper(new TrueExpression(), MoveBy(1, expression));
+                case {Type: Token.Forma.False} t:
+                    return GrowTreeHelper(new FalseExpression(), MoveBy(1, expression));
                 case {Type: Token.Forma.If} t:
                 {
                     

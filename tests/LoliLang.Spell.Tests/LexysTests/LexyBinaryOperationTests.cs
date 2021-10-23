@@ -106,7 +106,7 @@ namespace LoliLang.Spell.Tests.LexysTests
             var lexy = new Spell.Lexy.Lexy();
             
             //act
-            var answer = lexy.LookAt("if 1 == 1 then 1 else 0");
+            var answer = lexy.LookAt("if 1 == 1 then true else false");
 
             //assert
             answer.Should().BeEquivalentTo(new List<Token>()
@@ -116,9 +116,9 @@ namespace LoliLang.Spell.Tests.LexysTests
                 new ("==", Token.Forma.Eq),
                 new ("1", Token.Forma.Number),
                 new ("then", Token.Forma.Then),
-                new ("1", Token.Forma.Number),
+                new ("true", Token.Forma.True),
                 new ("else", Token.Forma.Else),
-                new ("0", Token.Forma.Number),
+                new ("false", Token.Forma.False),
             });
         }
     }

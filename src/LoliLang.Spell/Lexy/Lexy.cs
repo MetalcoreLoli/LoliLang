@@ -70,41 +70,33 @@ namespace LoliLang.Spell.Lexy
            new EqParingRule(),
            new LtParingRule(),
            new GtParingRule(),
-           new UniqueParsingRule(Token.Forma.If, "if",(value, word, context) =>
-           {
-               for (int i = 1; i < context.Length; i++)
-               {
-                   word += context[i];
-                   (_, string result) = ParseWord(word, context);
-                    if (result == value)
-                        return new Token(result, Token.Forma.If);
-               }
-               return null;
-           }),
-           new UniqueParsingRule(Token.Forma.Then, "then",(value, word, context) =>
-           {
-               for (int i = 1; i < context.Length; i++)
-               {
-                   word += context[i];
-                   (_, string result) = ParseWord(word, context);
-                    if (result == value)
-                        return new Token(result, Token.Forma.Then);
-               }
-               return null;
-           }),
-           new UniqueParsingRule(Token.Forma.Else, "else",(value, word, context) =>
-           {
-               for (int i = 1; i < context.Length; i++)
-               {
-                   word += context[i];
-                   (_, string result) = ParseWord(word, context);
-                    if (result == value)
-                        return new Token(result, Token.Forma.Else);
-               }
-               return null;
-           }),
+           new UniqueParsingRule(Token.Forma.If, "if",(forma, value, word, context) 
+               =>  WordToToken(forma, value, word, context)),
+           new UniqueParsingRule(Token.Forma.Then, "then",(forma, value, word, context) 
+               => WordToToken(forma, value, word, context)),
+           new UniqueParsingRule(Token.Forma.Else, "else",(forma, value, word, context) 
+               => WordToToken(forma, value, word, context)
+           ),
+           new UniqueParsingRule(Token.Forma.True, "true",(forma, value, word, context) 
+               => WordToToken(forma, value, word, context)
+           ),
+           new UniqueParsingRule(Token.Forma.False, "false",(forma, value, word, context) 
+               => WordToToken(forma, value, word, context)
+           ),
        };
-       
+
+       private static Token? WordToToken(Token.Forma forma, string value, string word, string context)
+       {
+            for (int i = 1; i < context.Length; i++)
+            {
+                word += context[i];
+                (_, string result) = ParseWord(word, context);
+                if (result == value)
+                    return new Token(result, forma);
+            }
+            return null;
+       }
+
        public static (string tail, char result) ParseSymbol(char s, string context)
        {
            string tail = string.Empty;

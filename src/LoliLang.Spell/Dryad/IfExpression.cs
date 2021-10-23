@@ -17,8 +17,8 @@ namespace LoliLang.Spell.Dryad
         {
             return _condition.Reduce().Value switch
             {
-                "True" => Left.Reduce(),
-                "False" => Right.Reduce(),
+                "true" => Left.Reduce(),
+                "false" => Right.Reduce(),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }

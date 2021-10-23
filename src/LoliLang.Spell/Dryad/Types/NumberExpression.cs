@@ -38,7 +38,7 @@ namespace LoliLang.Spell.Dryad.Types
             return b switch
             {
                 { } numberExpression => 
-                     new BoolExpression((operation(Number(this), Number(b))).ToString()),
+                     new BoolExpression((operation(Number(this), Number(b))).ToString().ToLower()),
                 _ => throw new StrongTypingException($"{b} is of NumberExpression type")
             };
         }

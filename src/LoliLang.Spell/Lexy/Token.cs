@@ -23,6 +23,8 @@ namespace LoliLang.Spell.Lexy
             If,
             Then,
             Else,
+            True,
+            False
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using LoliLang.Spell.Lexy;
 
 namespace LoliLang.Spell.ExampleOne
 {
@@ -9,7 +8,7 @@ namespace LoliLang.Spell.ExampleOne
         {
             var lexy = new Lexy.Lexy();
 
-            Console.WriteLine("Result: "+lexy.AnswersOn("if 2 / 2 == 1 then 1 else 0").Value);
+            Console.WriteLine("Result: "+lexy.AnswersOn("if 2 / 2 == 1 then true else false").Value);
         }
     }
 }
