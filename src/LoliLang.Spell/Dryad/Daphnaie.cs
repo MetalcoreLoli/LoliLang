@@ -77,6 +77,12 @@ namespace LoliLang.Spell.Dryad
                 case {Type: Token.Forma.Eq} t:
                     return GrowTreeHelper(new EqExpression(current, GrowTreeNextValue(expression)),
                         MoveBy(2, expression));
+                case {Type: Token.Forma.Lt} t:
+                    return GrowTreeHelper(new LtExpression(current, GrowTreeNextValue(expression)),
+                        MoveBy(2, expression));
+                case {Type: Token.Forma.Gt} t:
+                    return GrowTreeHelper(new GtExpression(current, GrowTreeNextValue(expression)),
+                        MoveBy(2, expression));
                 case {Type: Token.Forma.Add} t:
                     return GrowTreeHelper(new AddExpression(current, GrowTreeNextValue(expression)),
                         MoveBy(2, expression));

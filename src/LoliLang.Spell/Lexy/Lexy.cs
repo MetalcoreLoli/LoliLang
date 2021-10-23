@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using LoliLang.Spell.Dryad.Mem;
 using LoliLang.Spell.Lexy.Exceptions;
 using LoliLang.Spell.Lexy.ParsingRules;
 using Daphnaie = LoliLang.Spell.Dryad.Daphnaie;
 using Expression = LoliLang.Spell.Dryad.Expression;
+[assembly: InternalsVisibleTo("LoliLang.Spell.Tests")]
 
 namespace LoliLang.Spell.Lexy
 {
@@ -29,7 +31,7 @@ namespace LoliLang.Spell.Lexy
             _daphnaie = daphnaie;
         }
 
-        public Expression AnswersOn(string s)
+        public Expression AnswerOn(string s)
         {
             var validExpression= LookAt(s)/*.EyeOfTruth().*/.ToList();
             var tree = _daphnaie.GrowTreeFrom(validExpression);
@@ -58,7 +60,7 @@ namespace LoliLang.Spell.Lexy
             return tokens;
         }
     }
-   public static class LexyParsingMagick
+   internal static class LexyParsingMagick
    {
        public static readonly List<IParsingRule> RulesBook = new()
        {

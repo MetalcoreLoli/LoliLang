@@ -12,7 +12,7 @@ namespace LoliLang.Spell.Tests.LexysTests
         public void AnswerOn_WithValidAddExpression_ReturnNumberExpression()
         {
             var lexy = new Spell.Lexy.Lexy();
-            var  result= lexy.AnswersOn("420+69");
+            var  result= lexy.AnswerOn("420+69");
             result.Reduce().ToString().Should().BeEquivalentTo("489");
         }
         
@@ -20,7 +20,7 @@ namespace LoliLang.Spell.Tests.LexysTests
         public void AnswerOn_WithValidSubExpression_ReturnsNumberExpression()
         {
             var lexy = new Spell.Lexy.Lexy();
-            var  result= lexy.AnswersOn("12 - 2");
+            var  result= lexy.AnswerOn("12 - 2");
             result.Reduce().ToString().Should().BeEquivalentTo("10");
         }
         
@@ -28,7 +28,7 @@ namespace LoliLang.Spell.Tests.LexysTests
         public void AnswerOn_WithValidSubUndAddExpression_ReturnNumberExpression()
         {
             var lexy = new Spell.Lexy.Lexy();
-            var  result= lexy.AnswersOn("12 - 2 + 1");
+            var  result= lexy.AnswerOn("12 - 2 + 1");
             result.Should().BeOfType<NumberExpression>();
             result.Reduce().ToString().Should().BeEquivalentTo("11");
         }
@@ -37,7 +37,7 @@ namespace LoliLang.Spell.Tests.LexysTests
         public void AnswerOn_WithValidSubUndAddUndMulExpression_ReturnNumberExpression()
         {
             var lexy = new Spell.Lexy.Lexy();
-            var  result= lexy.AnswersOn("12 - 2 + 1 * 2 / 2");
+            var  result= lexy.AnswerOn("12 - 2 + 1 * 2 / 2");
             result.Should().BeOfType<NumberExpression>();
             result.Reduce().ToString().Should().BeEquivalentTo("11");
         }
@@ -46,7 +46,7 @@ namespace LoliLang.Spell.Tests.LexysTests
         public void AnswerOn_WithValidIfExpression_ReturnNumberExpression()
         {
             var lexy = new Spell.Lexy.Lexy();
-            var  result= lexy.AnswersOn("if 1 == 1 then 1 else 0");
+            var  result= lexy.AnswerOn("if 1 == 1 then 1 else 0");
             result.Should().BeOfType<NumberExpression>();
             result.Reduce().ToString().Should().BeEquivalentTo("1");
         }
