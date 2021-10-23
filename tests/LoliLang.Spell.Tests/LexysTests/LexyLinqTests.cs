@@ -20,14 +20,14 @@ namespace LoliLang.Spell.Tests.LexysTests
                 .Returns(new Token("NUMBER", Token.Forma.Number));
             plusMockRule
                 .Setup(x => x.TryOn('+', It.IsAny<string>()))
-                .Returns(new Token("PLUS", Token.Forma.Plus));
+                .Returns(new Token("PLUS", Token.Forma.Add));
 
             var rules = new List<IParsingRule> {mockNums.Object, plusMockRule.Object};
 
             rules.TryToLookAt("420+69").Should().BeEquivalentTo(new[]
             {
                 new Token("NUMBER", Token.Forma.Number),
-                new Token("PLUS", Token.Forma.Plus),
+                new Token("PLUS", Token.Forma.Add),
                 new Token("NUMBER", Token.Forma.Number)
             });
         }

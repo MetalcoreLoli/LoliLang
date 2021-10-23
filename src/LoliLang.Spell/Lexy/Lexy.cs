@@ -12,23 +12,29 @@ namespace LoliLang.Spell.Lexy
     public class Lexy
     {
         private IEnumerable<IParsingRule> _rules;
+        private readonly Daphnaie _daphnaie;
 
-        public Lexy() : this (LexyParsingMagick.RulesBook)
+        
+        public Lexy() : this (LexyParsingMagick.RulesBook, new Daphnaie())
         {
         }
 
-        public Lexy(IEnumerable<IParsingRule> rules)
+        public Lexy(IEnumerable<IParsingRule> rules) : this(rules, new Daphnaie())
+        {
+        }
+
+        public Lexy(IEnumerable<IParsingRule> rules, Daphnaie daphnaie)
         {
             _rules = rules;
+            _daphnaie = daphnaie;
         }
 
         public Expression AnswersOn(string s)
         {
             var validExpression= LookAt(s)/*.EyeOfTruth().*/.ToList();
-            var daphnaie = new Daphnaie(new LoliStack(), null);
-            var tree = daphnaie.GrowTreeFrom(validExpression);
-            var result = daphnaie.SayWhatIsThe(tree);
-            return daphnaie.SayWhatIsThe(tree).Reduce();
+            var tree = _daphnaie.GrowTreeFrom(validExpression);
+            var result = _daphnaie.SayWhatIsThe(tree);
+            return _daphnaie.SayWhatIsThe(tree).Reduce();
         }
         
         public IEnumerable<Token> LookAt(string expression)
@@ -61,7 +67,71 @@ namespace LoliLang.Spell.Lexy
            new SubParsingRule(), 
            new MulParsingRule(),
            new DivParsingRule(), 
+           new EqParingRule(),
+           new LtParingRule(),
+           new GtParingRule(),
+           new UniqueParsingRule(Token.Forma.If, "if",(value, word, context) =>
+           {
+               for (int i = 1; i < context.Length; i++)
+               {
+                   word += context[i];
+                   (_, string result) = ParseWord(word, context);
+                    if (result == value)
+                        return new Token(result, Token.Forma.If);
+               }
+               return null;
+           }),
+           new UniqueParsingRule(Token.Forma.Then, "then",(value, word, context) =>
+           {
+               for (int i = 1; i < context.Length; i++)
+               {
+                   word += context[i];
+                   (_, string result) = ParseWord(word, context);
+                    if (result == value)
+                        return new Token(result, Token.Forma.Then);
+               }
+               return null;
+           }),
+           new UniqueParsingRule(Token.Forma.Else, "else",(value, word, context) =>
+           {
+               for (int i = 1; i < context.Length; i++)
+               {
+                   word += context[i];
+                   (_, string result) = ParseWord(word, context);
+                    if (result == value)
+                        return new Token(result, Token.Forma.Else);
+               }
+               return null;
+           }),
        };
+       
+       public static (string tail, char result) ParseSymbol(char s, string context)
+       {
+           string tail = string.Empty;
+           char result = '\0';
+           foreach (var sym in context)
+           {
+               if (sym != s) tail += sym;
+               else result = sym;
+           }
+           return (tail, result);
+       }
+
+       public static (string tail, string result) ParseWord(string word, string context)
+       {
+           string tail = string.Empty;
+           string result = string.Empty;
+           
+           foreach (var sym in word)
+           {
+               (string t, char r) = ParseSymbol(sym, context);
+               if (r != '\0')
+                   result += r;
+               tail += tail;
+           }
+           return (tail, result == word? result : String.Empty);
+       }
+
        public static Token? TransformingSpellOn (
            this IEnumerable<IParsingRule> rules,
            char symbol,
@@ -87,29 +157,10 @@ namespace LoliLang.Spell.Lexy
            for(int i = 0; i < tokens.Count(); i += 2)
            {
                var token = tokens[i];
-               if (token.Type is < Token.Forma.Plus and <= Token.Forma.Mul)
+               if (token.Type is < Token.Forma.Add and <= Token.Forma.Mul)
                    throw new MissingOperandException(line.Aggregate("", (s, acc) => s + acc.Value));
            }
            return line;
        }
-
-
-       public static IEnumerable<Token> NormBinaryExpression(this IEnumerable<Token> expression)
-       {
-           if (expression.Count() != 3)
-               throw new ArgumentOutOfRangeException($"{expression.Count()} is not equal to 3");
-           
-           var normExpression = new List<Token>();
-
-           Token? operation = expression.FirstOrDefault(x => x.Type is >= Token.Forma.Plus and <= Token.Forma.Mul);
-           if (!operation.HasValue)
-               throw new NullReferenceException($"There is not binary operation in {expression}");
-           
-           normExpression.Add(operation.Value);
-           normExpression.AddRange(expression.Where(x => x.Type != operation.Value.Type));
-           
-           return normExpression;
-       }
-
    }
 }

@@ -1,17 +1,35 @@
+using System;
+
 namespace LoliLang.Spell.Lexy.ParsingRules
 {
     internal class BinaryOperationParsingRule : IParsingRule
     {
-        private readonly char _value;
-
+        protected readonly string _value;
         private readonly Token.Forma _forma;
-        public BinaryOperationParsingRule(char value, Token.Forma forma)
+        public BinaryOperationParsingRule(string value, Token.Forma forma)
         {
             _value = value;
             _forma = forma;
         }
 
-        public Token? TryOn(char symbol, string context) => 
-            symbol == _value ? new Token(_value.ToString(), _forma) : null;
+        public virtual Token? TryOn(char symbol, string context) => 
+            symbol.ToString() == _value ? new Token(_value.ToString(), _forma) : null;
+    }
+    
+    
+    internal class UniqueParsingRule : IParsingRule
+    {
+        protected readonly Token.Forma _forma;
+        private readonly string _value;
+        protected readonly Func<string, string, string, Token?> _tryOn;
+
+        public UniqueParsingRule(Token.Forma forma, string value, Func<string, string, string, Token?> tryOn)
+        {
+            _forma = forma;
+            _value = value;
+            _tryOn = tryOn;
+        }
+
+        public virtual Token? TryOn(char symbol, string context) => _tryOn(_value, symbol.ToString(), context);
     }
 }

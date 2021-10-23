@@ -41,5 +41,36 @@ namespace LoliLang.Spell.Tests.LexysTests
             result.Should().BeOfType<NumberExpression>();
             result.Reduce().ToString().Should().BeEquivalentTo("11");
         }
+        
+        [Fact]
+        public void AnswerOn_WithValidIfExpression_ReturnNumberExpression()
+        {
+            var lexy = new Spell.Lexy.Lexy();
+            var  result= lexy.AnswersOn("if 1 == 1 then 1 else 0");
+            result.Should().BeOfType<NumberExpression>();
+            result.Reduce().ToString().Should().BeEquivalentTo("1");
+        }
+
+        [Fact]
+        public void ParseWord_WithWordUndContext_ReturnsParsedWord()
+        {
+            string word = "expression";
+            string context = "asdasd das expression dasda";
+
+            (string tail, string result) = LexyParsingMagick.ParseWord(word, context);
+
+            result.Should().BeEquivalentTo("expression");
+        }
+        
+        [Fact]
+        public void ParseWord_WithoutWordInContext_ReturnsEmptyString()
+        {
+            string word = "expression";
+            string context = "asdasd das dasda";
+
+            (string tail, string result) = LexyParsingMagick.ParseWord(word, context);
+
+            result.Should().BeEquivalentTo(string.Empty);
+        }
     }
 }

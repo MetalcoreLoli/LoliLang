@@ -19,7 +19,7 @@ namespace LoliLang.Spell.Tests.LexysTests
             answer.Should().BeEquivalentTo(new List<Token>()
             {
                 new ("420", Token.Forma.Number),
-                new ("+", Token.Forma.Plus),
+                new ("+", Token.Forma.Add),
                 new ("69", Token.Forma.Number)
             });
         }
@@ -87,7 +87,7 @@ namespace LoliLang.Spell.Tests.LexysTests
             answer.Should().BeEquivalentTo(new List<Token>()
             {
                 new ("1", Token.Forma.Number),
-                new ("+", Token.Forma.Plus),
+                new ("+", Token.Forma.Add),
                 new ("23", Token.Forma.Number),
                 new ("-", Token.Forma.Sub),
                 new ("3", Token.Forma.Number),
@@ -95,6 +95,30 @@ namespace LoliLang.Spell.Tests.LexysTests
                 new ("4", Token.Forma.Number),
                 new ("/", Token.Forma.Div),
                 new ("5", Token.Forma.Number),
+            });
+        }
+
+
+        [Fact]
+        public void LookAt_WithIfExpression_ReturnsListOfTokens()
+        {
+            
+            var lexy = new Spell.Lexy.Lexy();
+            
+            //act
+            var answer = lexy.LookAt("if 1 == 1 then 1 else 0");
+
+            //assert
+            answer.Should().BeEquivalentTo(new List<Token>()
+            {
+                new ("if", Token.Forma.If),
+                new ("1", Token.Forma.Number),
+                new ("==", Token.Forma.Eq),
+                new ("1", Token.Forma.Number),
+                new ("then", Token.Forma.Then),
+                new ("1", Token.Forma.Number),
+                new ("else", Token.Forma.Else),
+                new ("0", Token.Forma.Number),
             });
         }
     }

@@ -17,18 +17,28 @@ namespace LoliLang.Spell.Dryad.Types
         public override Expression Sub(Expression b) => OperationHelper(b, (l, r) => l - r);
         public override Expression Mul(Expression b) => OperationHelper(b, (l, r) => l * r);
         public override Expression Div(Expression b) => OperationHelper(b, (l, r) => l / r);
+        public override Expression Eq(Expression b) => OperationBoolHelper(b, (l, r) => l == r);
+        public override Expression Gt(Expression b) => OperationBoolHelper(b, (l, r) => l > r);
+        public override Expression Lt(Expression b) => OperationBoolHelper(b, (l, r) => l < r);
 
         public override string ToString() => Value;
 
         #region Private Members
-
-
         private Expression OperationHelper(Expression b, Func<int, int, int> operation)
         {
             return b switch
             {
-                 Expression numberExpression => 
+                { } numberExpression => 
                      new NumberExpression((operation(Number(this), Number(b))).ToString()),
+                _ => throw new StrongTypingException($"{b} is of NumberExpression type")
+            };
+        }
+        private Expression OperationBoolHelper(Expression b, Func<int, int, bool> operation)
+        {
+            return b switch
+            {
+                { } numberExpression => 
+                     new BoolExpression((operation(Number(this), Number(b))).ToString()),
                 _ => throw new StrongTypingException($"{b} is of NumberExpression type")
             };
         }

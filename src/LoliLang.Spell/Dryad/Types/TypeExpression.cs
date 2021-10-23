@@ -8,5 +8,8 @@ namespace LoliLang.Spell.Dryad.Types
         public virtual Expression Sub(Expression b) => throw new NotImplementedException();
         public virtual Expression Mul(Expression b) => throw new NotImplementedException(); 
         public virtual Expression Div(Expression b) => throw new NotImplementedException();
+        public virtual Expression Eq(Expression b) => throw new NotImplementedException();
+        public virtual Expression Gt(Expression b) => throw new NotImplementedException(); 
+        public virtual Expression Lt(Expression b) => throw new NotImplementedException();
     }
 }
