@@ -2,16 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using LoliLang.Spell.Dryad.Builders;
-using LoliLang.Spell.Dryad.Mem;
 using LoliLang.Spell.Dryad.Types;
 using LoliLang.Spell.Lexy;
+using LoliLang.Spell.Mnemosyne;
 using IExpressionBuilder = LoliLang.Spell.Dryad.Builders.IExpressionBuilder;
 
 namespace LoliLang.Spell.Dryad
 {
     public class Daphnaie
     {
-        private readonly Spell.Dryad.Mem.ILoliStack<Expression> _stack;
+        
+        private readonly ILoliStack<Expression> _stack;
         private readonly IExpressionBuilder _magickBook;
 
         public Daphnaie() : this(
@@ -19,7 +20,7 @@ namespace LoliLang.Spell.Dryad
         {
         }
         
-        public Daphnaie(Spell.Dryad.Mem.ILoliStack<Expression> stack, IExpressionBuilder expressionBuilder)
+        public Daphnaie(ILoliStack<Expression> stack, IExpressionBuilder expressionBuilder)
         {
             _stack = stack 
                      ?? throw new NullReferenceException("Implementation of ILoliStack wasn't passed thought constructor or was null");
@@ -27,20 +28,66 @@ namespace LoliLang.Spell.Dryad
                                  ?? throw new NullReferenceException("Expression builder wasn't set ");
         }
 
-        public Expression SayWhatIsThe(Expression root)
+        internal ILoliStack<Expression> Stack => _stack;
+
+        public Expression SayWhatIsThe()
         {
-            return root.Reduce();
+            var top = _stack.Pop();
+
+            var res = DiveInto(top);
+            
+            //     if (top is BinaryExpression binaryExpression)
+       //     {
+       //         var left = binaryExpression.Left.Reduce();
+       //         var right = binaryExpression.Right.Reduce();
+       //         binaryExpression.Left = GetValueOfVar(left.Value);
+       //         binaryExpression.Right= GetValueOfVar(right.Value);
+       //         return binaryExpression.Reduce();
+       //     }
+
+            return top.Reduce();
         }
+
+        private Expression DiveInto(Expression top)
+        {
+            if (top is VariableNameExpression var)
+                return GetValueOfVar(var.Value);
+            if (top is BinaryExpression binaryExpression)
+                return DiveIntoBinary(binaryExpression);
+            return top;
+        }
+
+        private Expression DiveIntoBinary(BinaryExpression binaryExpression)
+        {
+            if (binaryExpression is DefineExpression) return binaryExpression;
+            if (binaryExpression.Left.Reduce() is VariableNameExpression lvar)
+                binaryExpression.Left = GetValueOfVar(lvar.Value);
+            if (binaryExpression.Right.Reduce() is VariableNameExpression rvar)
+                binaryExpression.Right = GetValueOfVar(rvar.Value);
+
+
+            return binaryExpression;
+        }
+
 
         public IExpressionBuilder SayWhatIsThe<T>() where T :Expression
         {
             throw new NotImplementedException();
         }
 
+        public Expression GetVarByName(string name)
+        {
+            return _stack.OfType<DefineExpression>().FirstOrDefault(x => x.Left.Value == name);
+        }
+        
+        public Expression GetValueOfVar(string name) => GetVarByName(name).Reduce();
+
         public Expression GrowTreeFrom(IEnumerable<Token> validExpression)
         {
             List<Token> expr = validExpression.ToList();
-            return GrowTreeHelper(null, expr);
+            var res  = GrowTreeHelper(null, expr);
+            _stack.Push(res);
+            return res;
         }
 
         private Expression GrowTreeHelper(
@@ -54,12 +101,20 @@ namespace LoliLang.Spell.Dryad
             {
                 case {Type: Token.Forma.Number} t:
                     return GrowTreeHelper(_magickBook.NewOfType<NumberExpression>(t.Value), MoveBy(1, expression));
-                case {Type: Token.Forma.Var} t:
-                    return GrowTreeHelper(new VariableNameExpression(t.Value), MoveBy(1, expression));
                 case {Type: Token.Forma.True} t:
                     return GrowTreeHelper(new TrueExpression(), MoveBy(1, expression));
                 case {Type: Token.Forma.False} t:
                     return GrowTreeHelper(new FalseExpression(), MoveBy(1, expression));
+                case {Type: Token.Forma.Var} t:
+                {
+                    var v = new VariableNameExpression(t.Value);
+
+                    var res = GetVarByName(v.Value);
+                    if (res is not null)
+                        return GrowTreeHelper(res.Reduce(), MoveBy(1, expression));
+
+                    return GrowTreeHelper(v, MoveBy(1, expression));
+                }
                 case {Type: Token.Forma.If} t:
                 {
                     var conditionSubExpr = GetSubTreeFrom(t.Type, Token.Forma.Then, expression);
@@ -80,7 +135,6 @@ namespace LoliLang.Spell.Dryad
                     var rightSubExprBody = MoveBy(1, expression);
                     var rightSubExpr = GrowTreeHelper(null, rightSubExprBody);
                     var var = new DefineExpression(current, rightSubExpr);
-                    _stack.Push(var);
                     return GrowTreeHelper(var, MoveBy(rightSubExprBody.Count + 1, expression));
                 }
                 case {Type: Token.Forma.Eq} t:
@@ -122,7 +176,6 @@ namespace LoliLang.Spell.Dryad
         {
             return MoveBy(step, expression).First();
         }
-        
         private List<Token> MoveBy (int step, IEnumerable<Token> expression) => expression.Skip(step).ToList();
     }
 }

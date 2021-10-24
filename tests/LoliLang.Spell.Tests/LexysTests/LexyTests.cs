@@ -57,7 +57,22 @@ namespace LoliLang.Spell.Tests.LexysTests
             var lexy = new Spell.Lexy.Lexy();
             var  result= lexy.AnswerOn("a = if 1 == 1 then 1 else 0");
 
-            result.Should().BeEquivalentTo("1");
+            result.ToString().Should().BeEquivalentTo("1");
+        }
+        
+        [Fact]
+        public void AnswerOn_WithCodeBlock_ReturnsResult()
+        {
+            var lexy = new Spell.Lexy.Lexy();
+            var codeBlock = new[]
+            {
+                "a = if 1 < 12 then 12 + 2 else 0",
+                "b = a / 2",
+                "b"
+            };
+            var  result= lexy.AnswerOn(codeBlock);
+
+            result.ToString().Should().BeEquivalentTo("7");
         }
 
         [Fact]

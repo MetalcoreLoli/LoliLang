@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
+using Expression = LoliLang.Spell.Dryad.Expression;
 
-namespace LoliLang.Spell.Dryad.Mem
+namespace LoliLang.Spell.Mnemosyne
 {
     public class LoliStack  : ILoliStack<Expression>
     {

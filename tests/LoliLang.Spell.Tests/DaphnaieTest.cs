@@ -1,6 +1,5 @@
 using FluentAssertions;
 using LoliLang.Spell.Dryad;
-using LoliLang.Spell.Dryad.Mem;
 using LoliLang.Spell.Dryad.Types;
 using Xunit;
 

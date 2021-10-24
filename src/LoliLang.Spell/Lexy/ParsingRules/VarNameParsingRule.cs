@@ -9,15 +9,18 @@ namespace LoliLang.Spell.Lexy.ParsingRules
         {
             if (symbol == "=" || symbol == " ") return null; 
             var tail = symbol;
-            for (int i = 1; i < context.Length; i++)
+            for (int i = 1; 
+                i < context.Length && 
+                !LexyParsingMagick.ReservedWord.Contains(context[i].ToString()); i++)
             {
                 if (context[i] == '=') break;
                 tail += context[i];
                 if (LexyParsingMagick.ReservedWord.Contains(tail.Trim()))
                     return null;
             }
-
+            
             tail = tail.Trim();
+            
             if (LexyParsingMagick.ReservedWord.Contains(tail))
                 return null;
 

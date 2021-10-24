@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using LoliLang.Spell.Dryad.Mem;
 using LoliLang.Spell.Lexy.Exceptions;
 using LoliLang.Spell.Lexy.ParsingRules;
 using Daphnaie = LoliLang.Spell.Dryad.Daphnaie;
@@ -35,8 +34,19 @@ namespace LoliLang.Spell.Lexy
         {
             var validExpression= LookAt(s)/*.EyeOfTruth().*/.ToList();
             var tree = _daphnaie.GrowTreeFrom(validExpression);
-            var result = _daphnaie.SayWhatIsThe(tree);
-            return _daphnaie.SayWhatIsThe(tree).Reduce();
+            var result = _daphnaie.SayWhatIsThe();
+            return result;
+        }
+        
+        public Expression AnswerOn(IEnumerable<string> lines)
+        {
+            foreach (var line in lines)
+            {
+                var validExpression= LookAt(line)/*.EyeOfTruth().*/.ToList();
+                var tree = _daphnaie.GrowTreeFrom(validExpression);
+            }
+            var result = _daphnaie.SayWhatIsThe();
+            return result;
         }
         
         public IEnumerable<Token> LookAt(string expression)

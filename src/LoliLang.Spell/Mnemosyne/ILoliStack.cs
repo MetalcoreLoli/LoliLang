@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace LoliLang.Spell.Dryad.Mem
+namespace LoliLang.Spell.Mnemosyne
 {
     public interface ILoliStack<T> : IEnumerable<T>
     {
