@@ -89,21 +89,11 @@ namespace LoliLang.Spell.Lexy
            new GtParingRule(),
            new VarNameParsingRule(),
            new DefineParsingRule(),
-           new UniqueParsingRule(Token.Forma.If, "if",(forma, value, word, context) 
-               =>  WordToToken(forma, value, word, context)
-           ),
-           new UniqueParsingRule(Token.Forma.Then, "then",(forma, value, word, context) 
-               => WordToToken(forma, value, word, context)
-           ),
-           new UniqueParsingRule(Token.Forma.Else, "else",(forma, value, word, context) 
-               => WordToToken(forma, value, word, context)
-           ),
-           new UniqueParsingRule(Token.Forma.True, "true",(forma, value, word, context) 
-               => WordToToken(forma, value, word, context)
-           ),
-           new UniqueParsingRule(Token.Forma.False, "false",(forma, value, word, context) 
-               => WordToToken(forma, value, word, context)
-           ),
+           new UniqueParsingRule(Token.Forma.If, "if", WordToToken),
+           new UniqueParsingRule(Token.Forma.Then, "then",WordToToken),
+           new UniqueParsingRule(Token.Forma.Else, "else",WordToToken),
+           new UniqueParsingRule(Token.Forma.True, "true",WordToToken),
+           new UniqueParsingRule(Token.Forma.False, "false",WordToToken),
        };
 
        private static Token? WordToToken(Token.Forma forma, string value, string word, string context)
